@@ -48,12 +48,12 @@ public class PriorityQueueTest
         while(!q.isEmpty())
         {
             final Priority<QueueTestTask> item = q.poll();
-            Assert.assertTrue(item.priority >= lastPriority);
+            Assert.assertTrue("Items are out of order: " + item.priority + "<" + lastPriority, item.priority >= lastPriority);
             lastPriority = item.priority;
             count++;
         }
         // ensure we dequeued as many items as we inserted
-        Assert.assertEquals(count, max);
+        Assert.assertEquals("Didn't dequeue all of the items", count, max);
 
         final Priority<QueueTestTask> item1 = new Priority<QueueTestTask>(666, new QueueTestTask(0));
         final Priority<QueueTestTask> item2 = new Priority<QueueTestTask>(0, new QueueTestTask(0));
